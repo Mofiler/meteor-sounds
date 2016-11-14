@@ -4,7 +4,7 @@ A Meteor package to aid in pre-loading sound assets and playing audio files. Is 
 
 ## Install
 
-`meteor add adej:meteor-sounds`
+`meteor add tafelito:meteor-sounds`
 
 ## Usage
 
@@ -15,13 +15,13 @@ Include a settings.json file like so,
 {
     "public" : {
         "sounds": {
-            "soundFx" : {
+            "simpleAudio" : {
                 // sounds included in public directory are
                 // added to the `application` directory
                 // when building with cordova
                 "soundId1" : "application/path/to/sound.wav"
             },
-            "soundAudio" : {
+            "complexAudio" : {
                 "soundId2" : "application/path/to/sound.wav"
             }
         }
@@ -58,8 +58,9 @@ Router.route('/', {
 | ------- | ----------- |
 | MeteorSounds.preloadAllAssets() | Preloads all audio files found in Meteor.setting.public.soundFx and Meteor.setting.public.soundAudio |
 | MeteorSounds.play(sound) | Plays an audio file whose id is `sound` |
-| MeteorSounds.loop(sound) | Loop an audio file whose id is `sound` |
+| MeteorSounds.loop(sound) | Loops an audio asset infinitely whose id is `sound` |
 | MeteorSounds.stop(sound) | Stops an audio file whose id is `sound` |
+| MeteorSounds.unload(sound) | Unloads an audio file from memory whose id is `sound` |
 
 
 #### Properties
