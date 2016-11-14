@@ -35,6 +35,39 @@ MeteorSounds.preloadAllAssets = function () {
   }
 };
 
+MeteorSounds.unloadAllAssets = function () {
+  if (_checkPlugin()) {
+    NativeAudio = window.plugins.NativeAudio;  
+
+    Meteor.settings = Meteor.settings || {};
+
+    _.defaults(Meteor.settings, {
+      public: {
+        sounds: {
+          simpleAudio: {},
+          complexAudio: {}
+        }
+      }
+    });
+
+    _.each(Meteor.settings.public.sounds.simpleAudio, function (simpleAudio, simpleAudioId) {
+      NativeAudio.unload(simpleAudioId, function () {
+      }, function (err) {
+        console.error(err);
+      });
+    });
+
+    _.each(Meteor.settings.public.sounds.complexAudio, function (complexAudio, complexAudioId) {
+      NativeAudio.unload(complexAudioId, function () {
+      }, function (err) {
+        console.error(err);
+      });
+    });
+
+    MeteorSounds.assetsLoaded.set(false);
+  }
+};
+
 MeteorSounds.play = function (sound, successCallback, errorCallback) {
   _checkPlugin() && window.plugins.NativeAudio.play(sound);
 };
